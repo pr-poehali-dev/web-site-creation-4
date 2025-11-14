@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Icon from '@/components/ui/icon';
+import Layout from '@/components/Layout';
 
 interface Course {
   id: number;
@@ -307,6 +309,7 @@ const Index = () => {
   }
 
   return (
+    <Layout>
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
       <div className="relative overflow-hidden bg-gradient-to-r from-primary via-secondary to-accent py-20 px-4">
         <div className="absolute inset-0 bg-grid-white/10"></div>
@@ -373,13 +376,12 @@ const Index = () => {
                     {course.tests} тестов
                   </Badge>
                 </div>
-                <Button 
-                  onClick={() => handleStartTest(course)} 
-                  className="w-full group"
-                >
-                  Начать тест
-                  <Icon name="Zap" size={18} className="group-hover:scale-110 transition-transform" />
-                </Button>
+                <Link to={`/course/${course.id}`} className="block">
+                  <Button className="w-full group">
+                    Подробнее
+                    <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}
@@ -423,6 +425,7 @@ const Index = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
